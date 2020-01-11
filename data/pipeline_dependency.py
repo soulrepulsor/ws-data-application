@@ -14,24 +14,6 @@ class Pipline:
     def __init__(self, spark: SparkSession):
         self._spark = spark
 
-    def _import_files(self):
-        """
-        Import needed files
-        :return: N/A
-        """
-        path = os.path.dirname(os.path.join(__file__))
-        self._spark.sparkContext.addPyFile(
-            os.path.join(
-                path,
-                'graphframes-0.7.0-spark2.4-s_2.11.jar'
-            )
-        )
-
-        sys.path.insert(
-            0,
-            'graphframes.zip'
-        )
-
     def progress(self) -> Optional[DataFrame]:
         """
         Returns a DataFrame that includes all of the possible paths from starting
@@ -183,8 +165,4 @@ if __name__ == '__main__':
     spark = SparkSession.builder.appName('Pipeline Dependency').getOrCreate()
 
     pipline = Pipline(spark)
-    result = pipline.progress()
-    result.show(n=20000)
-    # result.show(n=20000)
-    # print(result.count())
-    # result.printSchema()
+    result = pipline.progress().show()

@@ -43,5 +43,4 @@ if __name__ == '__main__':
     spark = SparkSession.builder.appName('Cleanup').getOrCreate()
     clean_up = Cleanup(spark)
     test = clean_up.process()
-    print(test.count())
-    test.printSchema()
+    test.show()

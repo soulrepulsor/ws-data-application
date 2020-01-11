@@ -79,7 +79,4 @@ class Label:
 if __name__ == '__main__':
     spark = SparkSession.builder.appName('Label').getOrCreate()
     label = Label(spark)
-    test = label.process()
-    # test.show()
-    # print(test.count())
-    # test.printSchema()
+    test = label.process().show()
